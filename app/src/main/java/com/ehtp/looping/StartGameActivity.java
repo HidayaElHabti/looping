@@ -1,6 +1,7 @@
 package com.ehtp.looping;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,11 +13,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONArray;
 
@@ -72,21 +76,17 @@ public class StartGameActivity extends AppCompatActivity {
         super.onStart();
 
         //Adding an event listener on the game reference
-        gameRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        gameRef.collection("players").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.d("log", e.toString());
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error != null) {
+                    Log.d("log", error.toString());
                     return;
                 }
-
-                if (documentSnapshot.exists()) {
-                    Object players = documentSnapshot.get("players");
-                    Log.d("log", "onEvent: "+documentSnapshot.get("players"));
-                    //List<String> players = (List<String>) documentSnapshot.get("players");
-                    if(players!=null)
-                        text_view_players.setText(players.toString());
-
+                text_view_players.setText("");
+                for (DocumentSnapshot documentSnapshot : value) {
+                    if(documentSnapshot.get("isHost").toString().equals("false"))
+                        text_view_players.append(documentSnapshot.get("username").toString() + " joined...\n");
                 }
             }
         });
@@ -99,5 +99,15 @@ public class StartGameActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT, gameID);
 
         startActivity(Intent.createChooser(intent, "Share Game ID"));
+    }
+
+    public void launchGame(View view){
+        //changing the game status to launched after the host clicks on launch game
+        gameRef.update("status", "launched");
+
+        //Redirecting to a test activity for now
+        Intent intent = new Intent(this, TestActivity.class);
+        intent.putExtra("gameID", gameID);
+        startActivity(intent);
     }
 }

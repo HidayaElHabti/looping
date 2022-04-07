@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Looping">
         <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoadingActivity"
             android:exported="false" />
         <activity

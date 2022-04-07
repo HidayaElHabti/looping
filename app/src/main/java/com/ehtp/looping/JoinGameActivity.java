@@ -38,6 +38,9 @@ public class JoinGameActivity extends AppCompatActivity {
     }
 
     public void joinGame(View view){
+        //Getting the game ID
+        String gameID = "";
+        gameID = edit_text_gameID.getText().toString();
 
         //Creating a simple player with the username entered
         Map<String, Object> player = new HashMap<>();
@@ -45,12 +48,13 @@ public class JoinGameActivity extends AppCompatActivity {
         player.put("isHost", false);
 
         //Referencing the game by the ID entered
-        gameRef = db.collection("games").document(String.valueOf(edit_text_gameID.getText()));
+        gameRef = db.collection("games").document(gameID);
         //Adding the player to the sub collection of players
         gameRef.collection("players").add(player);
 
         //Redirecting to the loading activity
         Intent intent = new Intent(this, LoadingActivity.class);
+        intent.putExtra("gameID", gameID);
         startActivity(intent);
     }
 }
