@@ -43,4 +43,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.firebase:firebase-dynamic-links'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 }
