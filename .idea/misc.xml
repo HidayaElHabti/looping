@@ -3,9 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_join_game.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/b3.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/background4.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/background_1.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/background_2.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/card_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/custom_button.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/ellipse_3.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_join_game.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_loading.xml" value="0.18385416666666668" />
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_play.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_splash.xml" value="0.15" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_start_game.xml" value="0.264" />

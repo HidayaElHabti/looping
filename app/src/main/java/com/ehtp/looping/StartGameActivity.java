@@ -5,9 +5,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,11 +39,29 @@ public class StartGameActivity extends AppCompatActivity {
     TextView text_view_players;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
+    LinearLayout colorBg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        colorBg = findViewById(R.id.color_background);
+        colorBg.setMinimumHeight(height/2);
+        AnimationDrawable animationDrawable= (AnimationDrawable) colorBg.getBackground();
+        animationDrawable.setEnterFadeDuration(20);
+        animationDrawable.setExitFadeDuration(20);
+        animationDrawable.start();
+        LinearLayout ll=findViewById(R.id.card_start);
+        ll.setTranslationY(300);
+        ll.setAlpha(0);
+        ll.animate().translationY(0).alpha(1).setDuration(5000).setStartDelay(400).start();
+
+        colorBg = findViewById(R.id.color_background);
+        colorBg.setMinimumHeight(height/3);
 
         text_view_gameID = findViewById(R.id.text_view_gameID);
         text_view_players = findViewById(R.id.text_view_players);

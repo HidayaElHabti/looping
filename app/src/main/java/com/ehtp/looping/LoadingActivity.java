@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,11 +22,19 @@ public class LoadingActivity extends AppCompatActivity {
     String gameID = "";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
+    LinearLayout colorBg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+
+        colorBg = findViewById(R.id.color_background);
+        colorBg.setMinimumHeight(height/2);
 
         //Getting the game ID
         Intent intent = getIntent();
