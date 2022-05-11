@@ -6,33 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".StartGameActivity"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:id="@+id/start_bg"
+    android:background="@drawable/gradient_list">
 
-    <LinearLayout
-        android:id="@+id/color_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/gradient_list"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@drawable/looping" />
 
     <LinearLayout
         android:id="@+id/card_start"
         android:background="@drawable/card_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewShare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Share this game ID with other players"
-        android:fontFamily="@font/open_sans"
+        android:fontFamily="@font/pacifico"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="22sp"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="5dp" />
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/teal_200"/>
     <TextView
         android:id="@+id/text_view_players"
         android:layout_width="match_parent"
@@ -42,7 +45,7 @@
         android:textSize="18sp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:textColor="#9f6aff" />
+        android:scrollbars="vertical"/>
 
     <TextView
         android:id="@+id/text_view_gameID"
@@ -66,7 +69,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/open_sans"
+        android:fontFamily="@font/pacifico"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"/>
@@ -80,7 +83,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/open_sans"
+        android:fontFamily="@font/pacifico"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"/>

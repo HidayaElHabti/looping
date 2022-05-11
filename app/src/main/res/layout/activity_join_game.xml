@@ -6,55 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".JoinGameActivity"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:id="@+id/join_bg"
+    android:background="@drawable/gradient_list">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        app:srcCompat="@drawable/looping" />
 
     <LinearLayout
         android:id="@+id/color_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/gradient_list"/>
+        android:orientation="horizontal"/>
 
     <LinearLayout
         android:id="@+id/card_join"
         android:background="@drawable/card_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter the game code"
-        android:fontFamily="@font/open_sans"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="22sp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="40dp" />
+        <TextView
+            android:id="@+id/textViewJoin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter the game code"
+            android:textAlignment="center"
+            android:textColor="@color/teal_200"
+            android:fontFamily="@font/pacifico"
+            android:textSize="22sp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp" />
 
-    <EditText
-        android:id="@+id/edit_text_gameID"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="mzVPtIRGDG4kYGr4o1hd"
-        android:layout_gravity="center"
-        android:textStyle="italic" />
+        <EditText
+            android:id="@+id/edit_text_gameID"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="mzVPtIRGDG4kYGr4o1hd"
+            android:textStyle="italic" />
 
-    <Button
-        android:id="@+id/button_join_game"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:onClick="joinGame"
-        android:text="Join The Game"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/open_sans"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:textColor="#ffffff" />
+        <Button
+            android:id="@+id/button_join_game"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:onClick="joinGame"
+            android:text="Join The Game"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/pacifico"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </LinearLayout>

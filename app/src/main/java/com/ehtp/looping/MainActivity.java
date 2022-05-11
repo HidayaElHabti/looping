@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,33 +28,31 @@ public class MainActivity extends AppCompatActivity {
         button_play = findViewById(R.id.button_play);
         button_how_to_play = findViewById(R.id.button_how_to_play);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-
-        card.setMinimumHeight(height/2);
-
         AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
         animationDrawable.setExitFadeDuration(1000);
         animationDrawable.start();
-        LinearLayout ll=findViewById(R.id.card_main);
-        ll.setTranslationY(300);
-        ll.setAlpha(0);
-        ll.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
-        ll.setTranslationZ(100);
+
+        card.setTranslationY(300);
+        card.setAlpha(0);
+        card.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
+        card.setTranslationZ(100);
+
         textView.setTranslationY(300);
         textView.setAlpha(0);
-        textView.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1200).start();
+        textView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1200).start();
+
         button_play.setTranslationY(300);
         button_play.setAlpha(0);
-        button_play.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(2700).start();
+        button_play.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(2800).start();
+
         button_how_to_play.setTranslationY(300);
         button_how_to_play.setAlpha(0);
-        button_how_to_play.animate().translationY(0).alpha(1).setDuration(1200).setStartDelay(3000).start();
+        button_how_to_play.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(3300).start();
     }
 
     public void playGame(View v){
         Intent intent = new Intent(this, PlayActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

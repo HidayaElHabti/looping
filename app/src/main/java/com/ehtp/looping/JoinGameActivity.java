@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,29 +28,37 @@ public class JoinGameActivity extends AppCompatActivity {
     String playerName;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
-    LinearLayout colorBg;
+    TextView textView;
+    Button button_join_game;
+    LinearLayout card, background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_game);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-
-        colorBg = findViewById(R.id.color_background);
-        colorBg.setMinimumHeight(height/2);
-        AnimationDrawable animationDrawable= (AnimationDrawable) colorBg.getBackground();
-        animationDrawable.setEnterFadeDuration(20);
-        animationDrawable.setExitFadeDuration(20);
-        animationDrawable.start();
-        LinearLayout ll=findViewById(R.id.card_join);
-        ll.setTranslationY(300);
-        ll.setAlpha(0);
-        ll.animate().translationY(0).alpha(1).setDuration(5000).setStartDelay(400).start();
-
         edit_text_gameID = findViewById(R.id.edit_text_gameID);
+        card = findViewById(R.id.card_join);
+        background = findViewById(R.id.join_bg);
+        textView = findViewById(R.id.textViewJoin);
+        button_join_game = findViewById(R.id.button_join_game);
+
+        AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.start();
+
+        card.setTranslationY(300);
+        card.setAlpha(0);
+        card.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
+        card.setTranslationZ(100);
+
+        textView.setTranslationY(300);
+        textView.setAlpha(0);
+        textView.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1200).start();
+
+        button_join_game.setTranslationY(300);
+        button_join_game.setAlpha(0);
+        button_join_game.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(2700).start();
 
         //Getting the player username entered previously
         Intent intent = getIntent();
@@ -75,5 +85,6 @@ public class JoinGameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoadingActivity.class);
         intent.putExtra("gameID", gameID);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

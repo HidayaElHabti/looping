@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,36 +37,50 @@ import java.util.Map;
 public class StartGameActivity extends AppCompatActivity {
 
     String gameID = "";
-    TextView text_view_gameID;
-    TextView text_view_players;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
-    LinearLayout colorBg;
+    TextView textView, text_view_gameID, text_view_players;
+    Button button_share_game_id, button_launch_game;
+    LinearLayout card, background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        colorBg = findViewById(R.id.color_background);
-        colorBg.setMinimumHeight(height/2);
-        AnimationDrawable animationDrawable= (AnimationDrawable) colorBg.getBackground();
-        animationDrawable.setEnterFadeDuration(20);
-        animationDrawable.setExitFadeDuration(20);
-        animationDrawable.start();
-        LinearLayout ll=findViewById(R.id.card_start);
-        ll.setTranslationY(300);
-        ll.setAlpha(0);
-        ll.animate().translationY(0).alpha(1).setDuration(5000).setStartDelay(400).start();
-
-        colorBg = findViewById(R.id.color_background);
-        colorBg.setMinimumHeight(height/3);
-
+        textView = findViewById(R.id.textViewShare);
         text_view_gameID = findViewById(R.id.text_view_gameID);
         text_view_players = findViewById(R.id.text_view_players);
+        button_share_game_id = findViewById(R.id.button_share_game_id);
+        button_launch_game = findViewById(R.id.button_launch_game);
+        card = findViewById(R.id.card_start);
+        background = findViewById(R.id.start_bg);
+
+        text_view_players.setMovementMethod(new ScrollingMovementMethod());
+
+        AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.start();
+
+        card.setTranslationY(300);
+        card.setAlpha(0);
+        card.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
+        card.setTranslationZ(100);
+
+        textView.setTranslationY(300);
+        textView.setAlpha(0);
+        textView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1200).start();
+
+        text_view_gameID.setAlpha(0);
+        text_view_gameID.animate().alpha(1).setDuration(1500).setStartDelay(3000).start();//1800
+
+        button_share_game_id.setTranslationY(300);
+        button_share_game_id.setAlpha(0);
+        button_share_game_id.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1800).start();//2300
+
+        button_launch_game.setTranslationY(300);
+        button_launch_game.setAlpha(0);
+        button_launch_game.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(2300).start();//2800
 
         //Getting the game ID as a message from the previous activity
         Intent intent = getIntent();
