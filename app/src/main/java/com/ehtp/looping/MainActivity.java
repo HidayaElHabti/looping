@@ -13,45 +13,43 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
-    Button button_play;
-    Button button_how_to_play;
-    LinearLayout colorBg;
+    Button button_play, button_how_to_play;
+    LinearLayout card, background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        colorBg = findViewById(R.id.color_background);
-        colorBg.setMinimumHeight(height/2);
-
+        card = findViewById(R.id.card_main);
+        background = findViewById(R.id.main_bg);
         textView = findViewById(R.id.textViewWelcome);
         button_play = findViewById(R.id.button_play);
         button_how_to_play = findViewById(R.id.button_how_to_play);
 
-        AnimationDrawable animationDrawable= (AnimationDrawable) colorBg.getBackground();
-        //animationDrawable.setEnterFadeDuration(3000);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+
+        card.setMinimumHeight(height/2);
+
+        AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
         animationDrawable.setExitFadeDuration(1000);
         animationDrawable.start();
         LinearLayout ll=findViewById(R.id.card_main);
         ll.setTranslationY(300);
         ll.setAlpha(0);
-        ll.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(400).start();
+        ll.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
+        ll.setTranslationZ(100);
         textView.setTranslationY(300);
         textView.setAlpha(0);
-        textView.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(400).start();
-        button_play.setTranslationX(300);
+        textView.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1200).start();
+        button_play.setTranslationY(300);
         button_play.setAlpha(0);
-        button_play.animate().translationX(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
-        button_how_to_play.setTranslationX(300);
+        button_play.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(2700).start();
+        button_how_to_play.setTranslationY(300);
         button_how_to_play.setAlpha(0);
-        button_how_to_play.animate().translationX(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
-
-        colorBg = findViewById(R.id.color_background);
-        colorBg.setMinimumHeight(height/2);
+        button_how_to_play.animate().translationY(0).alpha(1).setDuration(1200).setStartDelay(3000).start();
     }
 
     public void playGame(View v){

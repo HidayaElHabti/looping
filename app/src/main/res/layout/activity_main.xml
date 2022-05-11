@@ -6,29 +6,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@color/white">
+    android:id="@+id/main_bg"
+    android:background="@drawable/gradient_list">
 
-    <LinearLayout
-        android:id="@+id/color_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/gradient_list">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/looping"
-            android:layout_marginTop="100dp"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="50dp"
+        app:srcCompat="@drawable/looping" />
 
     <LinearLayout
         android:id="@+id/card_main"
         android:background="@drawable/card_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
     <TextView
         android:id="@+id/textViewWelcome"
