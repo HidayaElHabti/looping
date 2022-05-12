@@ -29,13 +29,6 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-
-        colorBg = findViewById(R.id.color_background);
-        colorBg.setMinimumHeight(height/2);
-
         //Getting the game ID
         Intent intent = getIntent();
         gameID = intent.getStringExtra("gameID");
