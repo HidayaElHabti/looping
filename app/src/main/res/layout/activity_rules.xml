@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:id="@+id/regle_bg"
+    android:background="@drawable/gradient_list"
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp"
+    android:scrollbars="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        app:srcCompat="@drawable/looping" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Regle1"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="1. There are two types of players in this game : a simple player and an imposter"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:layout_margin="5sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/Regle11"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="If you are the imposter, you will get a key word instead of an image and your job is to hide your identity for the whole game. "
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="5sp"/>
+        <TextView
+            android:id="@+id/Regle12"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="If you are a simple player, you will get an image just like every other simple player and your job is to find the imposter."
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="5sp"/>
+
+
+        <TextView
+            android:id="@+id/Regle2"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="2. When the game starts, questions will be asked."
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:layout_margin="5sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/Regle21"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="If you are the imposter, you will ask questions to identify the content of the image, and you will answer other players questions by guessing the image. "
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="5sp"/>
+        <TextView
+            android:id="@+id/Regle22"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="If you are a simple player, you will ask questions to identify the players, and you will answer other players questions to prove you have the image."
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="5sp"/>
+
+
+        <TextView
+            android:id="@+id/Regle3"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="3. After every round, there will be a vote."
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:layout_margin="5sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/Regle31"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="You will vote on the person who you think is the imposter if you are a simple player, or any other player if you are the imposter. "
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="5sp"/>
+        <TextView
+            android:id="@+id/Regle32"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="The person with the most votes will get eliminated."
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="1sp"/>
+
+
+        <TextView
+            android:id="@+id/Regle4"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="4. After a few rounds, the game ends."
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:layout_margin="5sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/Regle41"
+            android:background="@drawable/text_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="if the imposter successed in hiding his indentity, he will be the winner, and if he was discovered, the simple players will win."
+            android:textColor="@color/teal_200"
+            android:textSize="16sp"
+            android:layout_margin="5sp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

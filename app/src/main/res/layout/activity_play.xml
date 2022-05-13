@@ -30,9 +30,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Enter your username"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/quicksand_bold"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="30sp"
         android:textColor="@color/teal_200"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp" />
@@ -47,28 +47,28 @@
 
     <Button
         android:id="@+id/button_start_game"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:onClick="startGame"
         android:text="Start A Game"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/quicksand_bold"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/button_join_game"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:onClick="joinGame"
         android:text="Join A Game"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/quicksand_bold"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"/>

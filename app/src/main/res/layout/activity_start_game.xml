@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Share this game ID with other players"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/quicksand_bold"
         android:textAlignment="center"
         android:textSize="22sp"
         android:layout_marginTop="50dp"
@@ -62,28 +62,28 @@
 
     <Button
         android:id="@+id/button_share_game_id"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:onClick="shareGame"
         android:text="Share Game ID"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/quicksand_bold"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"/>
 
     <Button
         android:id="@+id/button_launch_game"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:onClick="launchGame"
         android:text="Launch Game"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:fontFamily="@font/pacifico"
+        android:fontFamily="@font/quicksand_bold"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textColor="#ffffff"/>

@@ -24,26 +24,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/textViewWelcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Welcome to the looping game"
-        android:fontFamily="@font/pacifico"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="40dp"
-        android:textColor="@color/teal_200"/>
+
+        <TextView
+            android:id="@+id/textViewWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/quicksand_bold"
+            android:text="Welcome to the looping game"
+            android:textAlignment="center"
+            android:textColor="@color/teal_200"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/button_play"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:fontFamily="@font/pacifico"
+            android:fontFamily="@font/quicksand_bold"
             android:onClick="playGame"
             android:text="Play"
             android:textAllCaps="false"
@@ -52,13 +53,14 @@
 
         <Button
             android:id="@+id/button_how_to_play"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:fontFamily="@font/pacifico"
+            android:fontFamily="@font/quicksand_bold"
             android:text="How To Play"
+            android:onClick="rules"
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="20sp" />
