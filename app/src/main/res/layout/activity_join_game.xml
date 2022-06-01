@@ -1,13 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".JoinGameActivity"
-    android:orientation="vertical"
     android:id="@+id/join_bg"
-    android:background="@drawable/gradient_list">
+    android:background="@drawable/old_paper">
+
+    <TextView
+        android:id="@+id/textViewJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cutive_mono"
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp"
+        android:text="Game's Code : "
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="80dp"/>
+
+    <EditText
+        android:id="@+id/edit_text_gameID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@id/textViewJoin" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:src="@drawable/line"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_gameID"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:src="@drawable/line"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_gameID"/>
+
+    <ImageView
+        android:id="@+id/stamp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/stamp2"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_gameID"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <Button
+        android:id="@+id/button_join_game"
+        android:onClick="joinGame"
+        android:text="Join The Game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cutive_mono"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rectangle"
+        android:textAllCaps="false"
+        android:textSize="28sp"
+        app:layout_constraintTop_toBottomOf="@id/stamp2"
+        android:layout_marginTop="10dp"/>
+
+    <!--
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="200dp"
@@ -36,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="Enter the game code"
             android:textAlignment="center"
-            android:textColor="@color/teal_200"
+            android:textColor="@color/colorPrimary"
             android:fontFamily="@font/quicksand_bold"
             android:textSize="22sp"
             android:layout_marginTop="50dp"
@@ -64,5 +132,6 @@
             android:textSize="20sp"
             android:textColor="#ffffff" />
     </LinearLayout>
+    -->
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

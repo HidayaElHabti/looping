@@ -3,22 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1546875" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/b3.xml" value="0.2703125" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/background4.xml" value="0.2703125" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/background_1.xml" value="0.2703125" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/background_2.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/border.xml" value="0.19427083333333334" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/card_background.xml" value="0.2703125" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/custom_button.xml" value="0.2703125" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/ellipse_3.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/line.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/rectangle.xml" value="0.2703125" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/drawable/text_bg.xml" value="0.2703125" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_calculating_votes.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_discussion.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_image.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_join_game.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_loading.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_play.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_rules.xml" value="0.4" />
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_splash.xml" value="0.15" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_replay.xml" value="0.25317028985507245" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_result.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_rules.xml" value="0.264" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_start_game.xml" value="0.264" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_test.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/activity_vote.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/item_vote_recycler.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/looping/app/src/main/res/layout/vote_list_item.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Lenovo/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_single_choice.xml" value="0.2536231884057971" />
       </map>
     </option>
   </component>

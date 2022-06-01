@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -30,9 +31,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.json.JSONArray;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class StartGameActivity extends AppCompatActivity {
 
@@ -41,51 +44,28 @@ public class StartGameActivity extends AppCompatActivity {
     DocumentReference gameRef;
     TextView textView, text_view_gameID, text_view_players;
     Button button_share_game_id, button_launch_game;
-    LinearLayout card, background;
+    int nbPlayers=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
+        ((looping) getApplication()).setIsHost(true);
+
         textView = findViewById(R.id.textViewShare);
         text_view_gameID = findViewById(R.id.text_view_gameID);
         text_view_players = findViewById(R.id.text_view_players);
         button_share_game_id = findViewById(R.id.button_share_game_id);
         button_launch_game = findViewById(R.id.button_launch_game);
-        card = findViewById(R.id.card_start);
-        background = findViewById(R.id.start_bg);
 
         text_view_players.setMovementMethod(new ScrollingMovementMethod());
 
-        AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
-        animationDrawable.setExitFadeDuration(1000);
-        animationDrawable.start();
-
-        card.setTranslationY(300);
-        card.setAlpha(0);
-        card.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
-        card.setTranslationZ(100);
-
-        textView.setTranslationY(300);
-        textView.setAlpha(0);
-        textView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1200).start();
-
-        text_view_gameID.setAlpha(0);
-        text_view_gameID.animate().alpha(1).setDuration(1500).setStartDelay(3000).start();//1800
-
-        button_share_game_id.setTranslationY(300);
-        button_share_game_id.setAlpha(0);
-        button_share_game_id.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1800).start();//2300
-
-        button_launch_game.setTranslationY(300);
-        button_launch_game.setAlpha(0);
-        button_launch_game.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(2300).start();//2800
+        ((looping) getApplication()).setIsHost(true);
 
         //Getting the game ID as a message from the previous activity
-        Intent intent = getIntent();
-        gameID = intent.getStringExtra(PlayActivity.GAME_ID);
-        Log.d("log", "gameID : "+gameID);
+        gameID = ((looping) getApplication()).getGameID();
+        Log.d("WTF", "onCreate: " + gameID);
         text_view_gameID.setText(gameID);
 
         //Referencing to that game in the database
@@ -139,12 +119,43 @@ public class StartGameActivity extends AppCompatActivity {
     }
 
     public void launchGame(View view){
+
         //changing the game status to launched after the host clicks on launch game
         gameRef.update("status", "launched");
 
-        //Redirecting to a test activity for now
-        Intent intent = new Intent(this, TestActivity.class);
-        intent.putExtra("gameID", gameID);
-        startActivity(intent);
+        //get all other players
+        gameRef.collection("players").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                    ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
+                    ((looping) getApplication()).playersNames.add((String) documentSnapshot.get("username"));
+                    nbPlayers++;
+                }
+                if(nbPlayers<3 || nbPlayers>12){
+                    Toast.makeText(StartGameActivity.this,
+                            "You need more than 2 players and less than 13!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                //add nbPlayers to database
+                gameRef.update("nbPlayers", nbPlayers);
+                ((looping) getApplication()).setNbPlayers(nbPlayers);
+
+                //choose an imposter
+                Random rand = new Random();
+                int imposterPos = rand.nextInt(nbPlayers);
+
+                //add player ID in imposter field of the game
+                gameRef.update("imposter", ((looping) getApplication()).playersIDs.get(imposterPos));
+
+                //initialize round
+                ((looping) getApplication()).setNbRounds(nbPlayers/3 );
+                gameRef.update("nbRounds", nbPlayers/3 );
+                gameRef.update("currentRound", 1);
+                //Redirecting to a test activity for now
+                Intent intent = new Intent(StartGameActivity.this, ImageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -22,16 +24,18 @@ public class LoadingActivity extends AppCompatActivity {
     String gameID = "";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
-    LinearLayout colorBg;
+    int nbPlayers=0;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+        textView = findViewById(R.id.textView);
         //Getting the game ID
         Intent intent = getIntent();
-        gameID = intent.getStringExtra("gameID");
+        gameID = ((looping) getApplication()).getGameID();
 
         gameRef = db.collection("games").document(gameID);
     }
@@ -51,11 +55,34 @@ public class LoadingActivity extends AppCompatActivity {
 
                 if (documentSnapshot.exists()) {
                     if(documentSnapshot.get("status").equals("launched")){
-                        //Redirecting to the test activity
-                        Intent intent = new Intent(LoadingActivity.this,TestActivity.class);
-                        intent.putExtra("gameID", gameID);
-                        startActivity(intent);
+                        gameRef.collection("players").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                                    ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
+                                    ((looping) getApplication()).playersNames.add(String.valueOf(documentSnapshot.get("username")));
+                                    nbPlayers++;
+                                }
+                                ((looping) getApplication()).setNbPlayers(nbPlayers);
+                                ((looping) getApplication()).setNbRounds(nbPlayers/3 );
+                                //Redirecting to the test activity
+                                Intent intent = new Intent(LoadingActivity.this,ImageActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+
                     }
+                } else {
+                    textView.setText("Room not found!");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(LoadingActivity.this, JoinGameActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    },2000);
                 }
             }
         });

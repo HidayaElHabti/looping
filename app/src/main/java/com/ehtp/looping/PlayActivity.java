@@ -36,9 +36,9 @@ public class PlayActivity extends AppCompatActivity {
     public static final String GAME_ID = "com.ehtp.looping.MESSAGE";
     public static final String PLAYER_NAME = "com.ehtp.looping.MESSAGE";
     String gameID;
+    String playerID;
     TextView textView;
     Button button_start_game, button_join_game;
-    LinearLayout card, background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,39 +49,13 @@ public class PlayActivity extends AppCompatActivity {
         textView = findViewById(R.id.textViewEnter);
         button_start_game = findViewById(R.id.button_start_game);
         button_join_game = findViewById(R.id.button_join_game);
-        card = findViewById(R.id.card_play);
-        background = findViewById(R.id.play_bg);
-
-        AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
-        animationDrawable.setExitFadeDuration(1000);
-        animationDrawable.start();
-
-        card.setTranslationY(300);
-        card.setAlpha(0);
-        card.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1000).start();
-        card.setTranslationZ(100);
-
-        textView.setTranslationY(300);
-        textView.setAlpha(0);
-        textView.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(1200).start();
-
-        edit_text_username.setTranslationY(300);
-        edit_text_username.setAlpha(0);
-        edit_text_username.animate().translationY(0).alpha(1).setDuration(1500).setStartDelay(1800).start();
-
-        button_start_game.setTranslationY(300);
-        button_start_game.setAlpha(0);
-        button_start_game.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(2300).start();
-
-        button_join_game.setTranslationY(300);
-        button_join_game.setAlpha(0);
-        button_join_game.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(2800).start();
 
     }
 
     public void startGame(View v){
         //Getting the username entered
         String username = String.valueOf(edit_text_username.getText());
+        ((looping) getApplication()).setPlayerName(username);
 
         //Creating a host player with the username entered
         Map<String, Object> host = new HashMap<>();
@@ -96,23 +70,30 @@ public class PlayActivity extends AppCompatActivity {
         DocumentReference newGameRef = db.collection("games").document();
         gameID = newGameRef.getId();
         newGameRef.set(game);
+        ((looping) getApplication()).setGameID(gameID);
 
         //Adding the host to a sub collection of the generated game document
-        newGameRef.collection("players").add(host);
+        DocumentReference playerRef = newGameRef.collection("players").document();
+        playerID = playerRef.getId();
+        playerRef.set(host);
+        ((looping) getApplication()).setPlayerID(playerID);
 
         //Redirecting to a new activity with a message containing the game ID
         Intent intent = new Intent(this, StartGameActivity.class);
-        Log.d("log", "Play Activity gameID : "+gameID);
-        intent.putExtra(GAME_ID, gameID);
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
+        //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    public void joinGame(View view){
+    public void joinNewGame(View view){
+        //Getting the username entered
+        String username = String.valueOf(edit_text_username.getText());
+        ((looping) getApplication()).setPlayerName(username);
+
+
         Intent intent = new Intent(this, JoinGameActivity.class);
-        intent.putExtra(PLAYER_NAME, edit_text_username.getText().toString());
-        Log.d("log", "joinGame: "+edit_text_username.getText());
         startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        finish();
+        //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

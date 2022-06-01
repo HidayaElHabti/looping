@@ -14,7 +14,6 @@ public class RulesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
 
-        LinearLayout background = findViewById(R.id.regle_bg);
         TextView textView1 = findViewById(R.id.Regle1);
         TextView textView11 = findViewById(R.id.Regle11);
         TextView textView12 = findViewById(R.id.Regle12);
@@ -27,9 +26,7 @@ public class RulesActivity extends AppCompatActivity {
         TextView textView4 = findViewById(R.id.Regle4);
         TextView textView41 = findViewById(R.id.Regle41);
 
-        AnimationDrawable animationDrawable= (AnimationDrawable) background.getBackground();
-        animationDrawable.setExitFadeDuration(1000);
-        animationDrawable.start();
+
 
         textView1.setTranslationY(200);
         textView1.setAlpha(0);
