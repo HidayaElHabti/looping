@@ -68,6 +68,22 @@ public class StartGameActivity extends AppCompatActivity {
 
         //Referencing to that game in the database
         gameRef = db.collection("games").document(gameID);
+
+        //get image url for this game
+        gameRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.d("log", e.toString());
+                    return;
+                }
+                if (documentSnapshot.exists()) {
+                    ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
+                    System.out.print(documentSnapshot.get("image"));
+                }
+            }
+
+        });
         
         //Changing the status of the game to loading
         gameRef.update("status", "loading")
@@ -128,8 +144,8 @@ public class StartGameActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                     ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
                     ((looping) getApplication()).playersNames.add((String) documentSnapshot.get("username"));
-                    nbPlayers++;
                 }
+                nbPlayers = queryDocumentSnapshots.size();
                 if(nbPlayers<3 || nbPlayers>12){
                     Toast.makeText(StartGameActivity.this,
                             "You need more than 2 players and less than 13!", Toast.LENGTH_LONG).show();

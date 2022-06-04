@@ -24,7 +24,7 @@ public class LoadingActivity extends AppCompatActivity {
     String gameID = "";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
-    int nbPlayers=0;
+    String url;
     TextView textView;
 
     @Override
@@ -55,11 +55,13 @@ public class LoadingActivity extends AppCompatActivity {
                 }
 
                 if (documentSnapshot.exists()) {
+                    ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
                     if(documentSnapshot.get("status").equals("launched")){
-                                //Redirecting to the test activity
-                                Intent intent = new Intent(LoadingActivity.this,ImageActivity.class);
-                                startActivity(intent);
-                                finish();
+
+                        //Redirecting to the test activity
+                        Intent intent = new Intent(LoadingActivity.this,ImageActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } else {
                     textView.setText("Room not found!");

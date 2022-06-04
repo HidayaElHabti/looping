@@ -62,24 +62,30 @@ public class JoinGameActivity extends AppCompatActivity {
         //Getting the game ID
         String gameID = "";
         gameID = edit_text_gameID.getText().toString().trim();
-        ((looping) getApplication()).setGameID(gameID);
-        //Creating a simple player with the username entered
-        Map<String, Object> player = new HashMap<>();
-        player.put("username", playerName);
-        player.put("isHost", false);
+        if(gameID.equals(""))
+        {
+            edit_text_gameID.setError("Enter Game Id");
+            edit_text_gameID.requestFocus();
+        }else {
+            ((looping) getApplication()).setGameID(gameID);
+            //Creating a simple player with the username entered
+            Map<String, Object> player = new HashMap<>();
+            player.put("username", playerName);
+            player.put("isHost", false);
 
-        //Referencing the game by the ID entered
-        gameRef = db.collection("games").document(gameID);
-        //Adding the player to the sub collection of players
-        //Adding the host to a sub collection of the generated game document
-        DocumentReference playerRef = gameRef.collection("players").document();
-        playerID = playerRef.getId();
-        playerRef.set(player);
-        ((looping) getApplication()).setPlayerID(playerID);
-        ((looping) getApplication()).setIsHost(false);
+            //Referencing the game by the ID entered
+            gameRef = db.collection("games").document(gameID);
+            //Adding the player to the sub collection of players
+            //Adding the host to a sub collection of the generated game document
+            DocumentReference playerRef = gameRef.collection("players").document();
+            playerID = playerRef.getId();
+            playerRef.set(player);
+            ((looping) getApplication()).setPlayerID(playerID);
+            ((looping) getApplication()).setIsHost(false);
 
-        Intent intent = new Intent(JoinGameActivity.this, LoadingActivity.class);
-        startActivity(intent);
-        finish();
+            Intent intent = new Intent(JoinGameActivity.this, LoadingActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

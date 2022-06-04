@@ -56,8 +56,7 @@ public class DiscussionActivity extends AppCompatActivity {
 
         if(!((looping) getApplication()).getIsHost())
             getPlayers();
-
-        if(((looping) getApplication()).getIsHost())
+        else
             setMoves();
     }
 
@@ -68,8 +67,8 @@ public class DiscussionActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
                     ((looping) getApplication()).playersNames.add(String.valueOf(documentSnapshot.get("username")));
-                    nbPlayers++;
                 }
+                nbPlayers = queryDocumentSnapshots.size();
                 ((looping) getApplication()).setNbPlayers(nbPlayers);
                 ((looping) getApplication()).setNbRounds(nbPlayers / 3);
 
