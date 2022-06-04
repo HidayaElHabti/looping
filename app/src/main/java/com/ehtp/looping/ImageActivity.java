@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +36,7 @@ public class ImageActivity extends AppCompatActivity {
     String gameID = "";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
+    int nbPlayers = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
 
         gameID = ((looping) getApplication()).getGameID();
-        Log.d("WTF", "onCreate: " + gameID);
         //Referencing to that game in the database
         gameRef = db.collection("games").document(gameID);
 
@@ -56,8 +58,6 @@ public class ImageActivity extends AppCompatActivity {
         isImposter();
 
         timer(5);
-
-
 
 
     }
@@ -97,7 +97,7 @@ public class ImageActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                Toast.makeText(ImageActivity.this,"Discussion starts now.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImageActivity.this, "Discussion starts now.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ImageActivity.this, DiscussionActivity.class);
                 startActivity(intent);
                 finish();

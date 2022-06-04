@@ -38,6 +38,7 @@ public class LoadingActivity extends AppCompatActivity {
         gameID = ((looping) getApplication()).getGameID();
 
         gameRef = db.collection("games").document(gameID);
+        Log.d("12 loading", "onCreate: "+((looping) getApplication()).playersNames.toString());
     }
 
     @Override
@@ -55,23 +56,10 @@ public class LoadingActivity extends AppCompatActivity {
 
                 if (documentSnapshot.exists()) {
                     if(documentSnapshot.get("status").equals("launched")){
-                        gameRef.collection("players").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                                    ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
-                                    ((looping) getApplication()).playersNames.add(String.valueOf(documentSnapshot.get("username")));
-                                    nbPlayers++;
-                                }
-                                ((looping) getApplication()).setNbPlayers(nbPlayers);
-                                ((looping) getApplication()).setNbRounds(nbPlayers/3 );
                                 //Redirecting to the test activity
                                 Intent intent = new Intent(LoadingActivity.this,ImageActivity.class);
                                 startActivity(intent);
                                 finish();
-                            }
-                        });
-
                     }
                 } else {
                     textView.setText("Room not found!");

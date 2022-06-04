@@ -5,15 +5,15 @@ import android.app.Application;
 import java.util.ArrayList;
 
 public class looping extends Application {
-    private String gameID; //all
-    private String playerID; //all
-    private String playerName; //all
-    private boolean isHost; //all
+    private String gameID; //all ok
+    private String playerID; //all ok
+    private String playerName; //all ok
+    private boolean isHost; //all ok
     private boolean isImposter; //all
-    private int nbPlayers;//host
+    private int nbPlayers;//host ok
     public ArrayList<String> playersIDs = new ArrayList<String>();; //host
     public ArrayList<String> playersNames = new ArrayList<String>();; //host
-    private int nbRounds; //host
+    private int nbRounds; //host ok
     private int currentRound; //all
 
     public String getGameID() {

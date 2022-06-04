@@ -51,23 +51,37 @@ public class DiscussionActivity extends AppCompatActivity {
         person2 = findViewById(R.id.person2);
 
         gameID = ((looping) getApplication()).getGameID();
-        Log.d("WTF", "onCreate: " + gameID);
         gameRef = db.collection("games").document(gameID);
-
-
         roundNumber.setText(((looping) getApplication()).getCurrentRound()+"");
-        //moves = new ArrayList<Map<String,String>>();
+
+        if(!((looping) getApplication()).getIsHost())
+            getPlayers();
 
         if(((looping) getApplication()).getIsHost())
             setMoves();
+    }
 
-        getQuestions();
+    private void getPlayers(){
+        gameRef.collection("players").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
+                    ((looping) getApplication()).playersNames.add(String.valueOf(documentSnapshot.get("username")));
+                    nbPlayers++;
+                }
+                ((looping) getApplication()).setNbPlayers(nbPlayers);
+                ((looping) getApplication()).setNbRounds(nbPlayers / 3);
+
+                Log.d("WTF", "onSuccess: "+((looping) getApplication()).playersNames.toString());
+                getQuestions();
+            }
+        });
     }
 
     private void setMoves() {
-        //number of players
         nbPlayers = ((looping) getApplication()).getNbPlayers();
-
+        Log.d("WTF", "setMoves: "+nbPlayers);
         //array of names
         ArrayList<String> playersToAsk = new ArrayList<String>(nbPlayers);
         //ArrayList<String> playerNames = (((looping) getApplication()).playersNames);
@@ -75,7 +89,7 @@ public class DiscussionActivity extends AppCompatActivity {
                 (((looping) getApplication()).playersNames)) {
             playersToAsk.add(name);
         }
-
+        Log.d("WTF", "setMoves: "+playersToAsk.toString());
         Random rand = new Random();
         int personToAsk;
 
@@ -96,6 +110,7 @@ public class DiscussionActivity extends AppCompatActivity {
                 playersToAsk.add(currentPlayer);
             playersToAsk.remove(playerToAsk);
         }
+        getQuestions();
     }
 
     private void getQuestions() {
@@ -105,14 +120,15 @@ public class DiscussionActivity extends AppCompatActivity {
                 for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                     Question question = documentSnapshot.toObject(Question.class);
                     questions.add(question);
+                    Log.d("WTF", "onSuccess: "+question.sender + question.receiver);
                 }
                 currentDiscussion = 0;
                 person1.setText(questions.get(currentDiscussion).sender);
                 person2.setText(questions.get(currentDiscussion).receiver);
+                Log.d("WTF", "onSuccess: "+questions.toString());
                 timer();
             }
         });
-
     }
 
     private void timer() {

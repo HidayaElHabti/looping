@@ -55,6 +55,7 @@ public class VoteActivity extends AppCompatActivity {
 
         String[] playerNames = new String[((looping) getApplication()).playersNames.size()];
         ((looping) getApplication()).playersNames.toArray(playerNames);
+        Log.d("12 vote", "initListViewData: "+((looping) getApplication()).playersNames.toString());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_list_item_single_choice, playerNames);

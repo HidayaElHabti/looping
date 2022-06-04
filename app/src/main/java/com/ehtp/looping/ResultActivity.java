@@ -19,7 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class ResultActivity extends AppCompatActivity {
     String gameID = "";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DocumentReference gameRef, playerVotedOnRef;
+    DocumentReference gameRef;
     String mostVotedOnId, mostVotedOnName;
     TextView result;
     Handler handler = new Handler();
@@ -68,36 +68,38 @@ public class ResultActivity extends AppCompatActivity {
                         mostVotedOnName = documentSnapshot.getString("username");
                     }
                 }
+                Log.d("WTF", "onSuccess: "+mostVotedOnName);
                 gameRef.update("votesCalculated", true);
             }
         });
     }
 
     private void next() {
+        gameRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String imposterID = documentSnapshot.getString("imposter");
+                if(mostVotedOnId.equals(imposterID)){
+                    ((looping) getApplication()).playersIDs.clear();
+                    ((looping) getApplication()).playersNames.clear();
+                    result.setText("Simple players won.");
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(ResultActivity.this, ReplayActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    },5000);
 
-        int currentRound = ((looping) getApplication()).getCurrentRound();
-        int nbRounds = ((looping) getApplication()).getNbRounds();
-        if(currentRound<nbRounds){
-            ((looping) getApplication()).setCurrentRound(currentRound + 1);
-            gameRef.update("currentRound", currentRound + 1);
-            gameRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>(){
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    String imposterID = documentSnapshot.getString("imposter");
-                    if(mostVotedOnId.equals(imposterID)){
-                        ((looping) getApplication()).playersIDs.clear();
-                        ((looping) getApplication()).playersNames.clear();
-                        result.setText("Simple players won.");
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(ResultActivity.this, ReplayActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        },5000);
+                } else {
+                    int currentRound = ((looping) getApplication()).getCurrentRound();
+                    int nbRounds = ((looping) getApplication()).getNbRounds();
+                    if(currentRound<nbRounds){
+                        ((looping) getApplication()).setCurrentRound(currentRound + 1);
+                        gameRef.update("currentRound", currentRound + 1);
 
-                    } else{
+
                         ((looping) getApplication()).playersNames.remove(mostVotedOnName);
                         ((looping) getApplication()).playersIDs.remove(mostVotedOnId);
                         int nbPlayers;
@@ -105,10 +107,12 @@ public class ResultActivity extends AppCompatActivity {
                         nbPlayers--;
                         ((looping) getApplication()).setNbPlayers(nbPlayers);
                         gameRef.update("nbPlayers",nbPlayers);
+
                         for(String playerID : ((looping) getApplication()).playersIDs){
                             gameRef.collection("players")
                                     .document(playerID).update("votes", 0);
                         }
+
                         result.setText("You have voted on " + mostVotedOnName + ".\n" +
                                 "It's not the imposter.\n" +
                                 "New round will start soon.");
@@ -122,22 +126,21 @@ public class ResultActivity extends AppCompatActivity {
                                 finish();
                             }
                         },5000);
+                    } else {
+                        ((looping) getApplication()).playersIDs.clear();
+                        ((looping) getApplication()).playersNames.clear();
+                        result.setText("Imposter won!");
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(ResultActivity.this, ReplayActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        },5000);
                     }
                 }
-            });
-
-        } else {
-            ((looping) getApplication()).playersIDs.clear();
-            ((looping) getApplication()).playersNames.clear();
-            result.setText("Imposter won!");
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(ResultActivity.this, ReplayActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            },5000);
-        }
+            }
+        });
     }
 }

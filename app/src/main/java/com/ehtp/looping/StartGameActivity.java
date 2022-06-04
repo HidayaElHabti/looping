@@ -61,11 +61,9 @@ public class StartGameActivity extends AppCompatActivity {
 
         text_view_players.setMovementMethod(new ScrollingMovementMethod());
 
-        ((looping) getApplication()).setIsHost(true);
-
         //Getting the game ID as a message from the previous activity
         gameID = ((looping) getApplication()).getGameID();
-        Log.d("WTF", "onCreate: " + gameID);
+
         text_view_gameID.setText(gameID);
 
         //Referencing to that game in the database
