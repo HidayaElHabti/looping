@@ -2,9 +2,13 @@ package com.ehtp.looping;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +22,21 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -37,6 +55,8 @@ public class ImageActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
     int nbPlayers = 0;
+    Handler mainHandler = new Handler();
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +71,19 @@ public class ImageActivity extends AppCompatActivity {
         imageViewInformation = findViewById(R.id.imageViewInformation);
         imageViewInformation.setVisibility(View.INVISIBLE);
         textViewTimer = findViewById(R.id.imageTimer);
+        Bitmap bitmap = null;
+        new ShowInfo().start();
 
-        ((looping) getApplication()).setCurrentRound(1);
+//        imageViewInformation.setImageBitmap(img);
+//        ((looping) getApplication()).setCurrentRound(1);
+//        Picasso.get().load(new File("http://www.google.fr/intl/en_com/images/srpr/logo1w.png")).networkPolicy(NetworkPolicy.OFFLINE).into(imageViewInformation);
         //((looping) getApplication()).setNewRound(true);
 
         isImposter();
 
-        timer(5);
+        timer(30);
+
+        finish();
 
 
     }
@@ -112,6 +138,63 @@ public class ImageActivity extends AppCompatActivity {
         } else {
             button_show_or_hide.setText("Show");
             imageViewInformation.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    class ShowInfo extends Thread{
+        String url;
+        String hint;
+        Bitmap bitmap;
+
+        public void ShowInfo(){
+            url = ((looping) getApplication()).getImage();
+            hint = ((looping) getApplication()).getHint();
+        }
+
+        @Override
+        public void run(){
+            OkHttpClient client= new OkHttpClient();
+            String url = "http://172.16.219.196:5000/api/images/Images/1654455301547.jpg";
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    System.out.println("not found!!!");
+//                    Intent intent = new Intent(PlayActivity.this, PlayActivity.class);
+//                    startActivity(intent);
+                }
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    if(response.isSuccessful())
+                    {
+                        System.out.println("url added");
+                        ResponseBody responseBody = response.body();
+                        if (responseBody != null) {
+                            InputStream instream = responseBody.byteStream();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            int bufferSize = 1024;
+                            byte[] buffer = new byte[bufferSize];
+                            int len = 0;
+                            try {
+                                // instream is content got from httpentity.getContent()
+                                while ((len = instream.read(buffer)) != -1) {
+                                    baos.write(buffer, 0, len);
+                                }
+                                baos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            byte[] b = baos.toByteArray();
+                            Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+                            imageViewInformation.setImageBitmap(bmp);
+                        }
+
+                    }
+                }
+            });
         }
     }
 }

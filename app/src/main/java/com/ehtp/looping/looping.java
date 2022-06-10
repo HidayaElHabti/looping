@@ -8,7 +8,8 @@ public class looping extends Application {
     private String gameID; //all ok
     private String playerID; //all ok
     private String playerName; //all ok
-    private String image;
+    private String image; // url for all
+    private String hint;
     private boolean isHost; //all ok
     private boolean isImposter; //all
     private int nbPlayers;//host ok
@@ -38,6 +39,14 @@ public class looping extends Application {
     }
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public String getPlayerID() {

@@ -56,6 +56,7 @@ public class LoadingActivity extends AppCompatActivity {
 
                 if (documentSnapshot.exists()) {
                     ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
+                    ((looping) getApplication()).setImage((String) documentSnapshot.get("hint"));
                     if(documentSnapshot.get("status").equals("launched")){
 
                         //Redirecting to the test activity

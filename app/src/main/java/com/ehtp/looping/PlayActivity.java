@@ -73,11 +73,9 @@ public class PlayActivity extends AppCompatActivity {
 
             //Adding the game to the database and getting its ID
             DocumentReference newGameRef = db.collection("games").document();
-            new FetchImage().start();
             gameID = newGameRef.getId();
             newGameRef.set(game);
             ((looping) getApplication()).setGameID(gameID);
-
             //Adding the host to a sub collection of the generated game document
             DocumentReference playerRef = newGameRef.collection("players").document();
             playerID = playerRef.getId();
@@ -87,6 +85,7 @@ public class PlayActivity extends AppCompatActivity {
             //Redirecting to a new activity with a message containing the game ID
             Intent intent = new Intent(this, StartGameActivity.class);
             startActivity(intent);
+            new FetchImage().start();
             finish();
         } else {
             edit_text_username.setError("Please enter your name.");
@@ -125,11 +124,15 @@ public class PlayActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Request request, IOException e) {
                     System.out.println("url not added");
+//                    Intent intent = new Intent(PlayActivity.this, PlayActivity.class);
+//                    startActivity(intent);
                 }
                 @Override
                 public void onResponse(Response response) throws IOException {
                     if(response.isSuccessful())
                     {
+                        if(response.code() != 200)
+
                         System.out.println("url added");
                     }
                 }
