@@ -115,7 +115,7 @@ public class PlayActivity extends AppCompatActivity {
         @Override
         public void run(){
             OkHttpClient client= new OkHttpClient();
-            String url = "http://172.16.219.196:5000/api/game";
+            String url = "http://40.123.248.207:200/api/game";
             Request request = new Request.Builder()
                     .url(url)
                     .get()

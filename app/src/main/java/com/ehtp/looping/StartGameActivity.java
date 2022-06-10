@@ -79,7 +79,7 @@ public class StartGameActivity extends AppCompatActivity {
                 }
                 if (documentSnapshot.exists()) {
                     ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
-                    System.out.print(documentSnapshot.get("image"));
+                    ((looping) getApplication()).setImage((String) documentSnapshot.get("hint"));
                 }
             }
 
@@ -146,11 +146,11 @@ public class StartGameActivity extends AppCompatActivity {
                     ((looping) getApplication()).playersNames.add((String) documentSnapshot.get("username"));
                 }
                 nbPlayers = queryDocumentSnapshots.size();
-                if(nbPlayers<3 || nbPlayers>12){
-                    Toast.makeText(StartGameActivity.this,
-                            "You need more than 2 players and less than 13!", Toast.LENGTH_LONG).show();
-                    return;
-                }
+//                if(nbPlayers<3 || nbPlayers>12){
+//                    Toast.makeText(StartGameActivity.this,
+//                            "You need more than 2 players and less than 13!", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
                 //add nbPlayers to database
                 gameRef.update("nbPlayers", nbPlayers);
                 ((looping) getApplication()).setNbPlayers(nbPlayers);
