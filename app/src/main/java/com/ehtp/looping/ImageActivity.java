@@ -42,7 +42,7 @@ public class ImageActivity extends AppCompatActivity {
     Button button_show_or_hide;
     ImageView imageViewInformation;
     TextView textViewTimer;
-    TextView hintInfo;
+    TextView hintInfo,mssg;
     long duration;
     String imposterID;
     String gameID = "";
@@ -64,6 +64,7 @@ public class ImageActivity extends AppCompatActivity {
         imageViewInformation.setVisibility(View.INVISIBLE);
         textViewTimer = findViewById(R.id.imageTimer);
         hintInfo = findViewById(R.id.hint);
+        mssg = findViewById(R.id.mssg);
         new ShowInfo().start();
         ((looping) getApplication()).setCurrentRound(1);
         //((looping) getApplication()).setNewRound(true);
@@ -123,10 +124,12 @@ public class ImageActivity extends AppCompatActivity {
             button_show_or_hide.setText("Hide");
             imageViewInformation.setVisibility(View.VISIBLE);
             hintInfo.setVisibility(View.VISIBLE);
+            mssg.setVisibility(View.VISIBLE);
         } else {
             button_show_or_hide.setText("Show");
             imageViewInformation.setVisibility(View.INVISIBLE);
             hintInfo.setVisibility(View.INVISIBLE);
+            mssg.setVisibility(View.INVISIBLE);
         }
     }
     class ShowInfo extends Thread{
