@@ -37,7 +37,7 @@ public class DiscussionActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference gameRef;
     ArrayList<Question> questions = new ArrayList<Question>();
-    int nbPlayers, currentDiscussion;
+    int nbPlayers = 0, currentDiscussion;
     CountDownTimer countDownTimer;
 
     @Override
@@ -64,11 +64,13 @@ public class DiscussionActivity extends AppCompatActivity {
         gameRef.collection("players").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                    ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
-                    ((looping) getApplication()).playersNames.add(String.valueOf(documentSnapshot.get("username")));
+                if(((looping) getApplication()).playersNames.size() == 0) {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        ((looping) getApplication()).playersIDs.add(documentSnapshot.getId());
+                        ((looping) getApplication()).playersNames.add(String.valueOf(documentSnapshot.get("username")));
+                    }
+                    nbPlayers = queryDocumentSnapshots.size();
                 }
-                nbPlayers = queryDocumentSnapshots.size();
                 ((looping) getApplication()).setNbPlayers(nbPlayers);
                 ((looping) getApplication()).setNbRounds(nbPlayers / 3);
 

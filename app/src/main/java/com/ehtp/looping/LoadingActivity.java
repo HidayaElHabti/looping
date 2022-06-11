@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -56,7 +57,8 @@ public class LoadingActivity extends AppCompatActivity {
 
                 if (documentSnapshot.exists()) {
                     ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
-                    ((looping) getApplication()).setImage((String) documentSnapshot.get("hint"));
+                    ((looping) getApplication()).setHint((String) documentSnapshot.get("hint"));
+                    //Toast.makeText(LoadingActivity.this, "image:"+((looping) getApplication()).getImage(), Toast.LENGTH_SHORT).show();
                     if(documentSnapshot.get("status").equals("launched")){
 
                         //Redirecting to the test activity

@@ -42,6 +42,7 @@ public class ImageActivity extends AppCompatActivity {
     Button button_show_or_hide;
     ImageView imageViewInformation;
     TextView textViewTimer;
+    TextView hintInfo;
     long duration;
     String imposterID;
     String gameID = "";
@@ -62,6 +63,7 @@ public class ImageActivity extends AppCompatActivity {
         imageViewInformation = findViewById(R.id.imageViewInformation);
         imageViewInformation.setVisibility(View.INVISIBLE);
         textViewTimer = findViewById(R.id.imageTimer);
+        hintInfo = findViewById(R.id.hint);
         new ShowInfo().start();
         ((looping) getApplication()).setCurrentRound(1);
         //((looping) getApplication()).setNewRound(true);
@@ -120,15 +122,16 @@ public class ImageActivity extends AppCompatActivity {
         if(button_show_or_hide.getText().toString().equals("Show")){
             button_show_or_hide.setText("Hide");
             imageViewInformation.setVisibility(View.VISIBLE);
+            hintInfo.setVisibility(View.VISIBLE);
         } else {
             button_show_or_hide.setText("Show");
             imageViewInformation.setVisibility(View.INVISIBLE);
+            hintInfo.setVisibility(View.INVISIBLE);
         }
     }
     class ShowInfo extends Thread{
         String url;
         String hint;
-        Bitmap bitmap;
 
         public void ShowInfo(){
             url = ((looping) getApplication()).getImage();
@@ -137,12 +140,16 @@ public class ImageActivity extends AppCompatActivity {
 
         @Override
         public void run(){
-            //String url = "http://40.123.248.207:200/Images\\1654197175861.jpg";
+            System.out.println(((looping) getApplication()).getImage());
+            String image = ((looping) getApplication()).getImage().replace('\\','/');
+            String info = ((looping) getApplication()).getHint();
             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Picasso.with(ImageActivity.this).load(url).into(imageViewInformation);
-                                    Toast.makeText(ImageActivity.this, "hint:"+hint+" image:"+url, Toast.LENGTH_SHORT).show();
+                                    if(((looping) getApplication()).getIsImposter())
+                                        Picasso.with(ImageActivity.this).load(image).into(imageViewInformation);
+                                    else
+                                        hintInfo.setText("Keep it secret:\n"+info);
                                 }
                             });
 

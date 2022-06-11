@@ -69,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
                     }
                 }
                 Log.d("WTF", "onSuccess: "+mostVotedOnName);
-                gameRef.update("votesCalculated", true);
+                gameRef.update("mostVotedOnId", mostVotedOnId);
             }
         });
     }
@@ -79,6 +79,7 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String imposterID = documentSnapshot.getString("imposter");
+                mostVotedOnId = documentSnapshot.getString("mostVotedOnId");
                 if(mostVotedOnId.equals(imposterID)){
                     ((looping) getApplication()).playersIDs.clear();
                     ((looping) getApplication()).playersNames.clear();

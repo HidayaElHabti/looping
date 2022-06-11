@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,6 @@ public class StartGameActivity extends AppCompatActivity {
     TextView textView, text_view_gameID, text_view_players;
     Button button_share_game_id, button_launch_game;
     int nbPlayers=0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,8 @@ public class StartGameActivity extends AppCompatActivity {
                 }
                 if (documentSnapshot.exists()) {
                     ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
-                    ((looping) getApplication()).setImage((String) documentSnapshot.get("hint"));
+                    ((looping) getApplication()).setHint((String) documentSnapshot.get("hint"));
+                    Toast.makeText(StartGameActivity.this, "image:"+documentSnapshot.get("hint"), Toast.LENGTH_SHORT).show();
                 }
             }
 
