@@ -147,9 +147,9 @@ public class ImageActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     if(((looping) getApplication()).getIsImposter())
-                                        Picasso.with(ImageActivity.this).load(image).into(imageViewInformation);
+                                        Picasso.get().load(image).into(imageViewInformation);
                                     else
-                                        hintInfo.setText("Keep it secret:\n"+info);
+                                        hintInfo.setText(info);
                                 }
                             });
 

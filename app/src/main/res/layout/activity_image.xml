@@ -61,10 +61,26 @@
         />
 
     <TextView
-        android:id="@+id/hint"
-        android:text="Hint Here"
+        android:id="@+id/mssg"
+        android:text="You're The imposter! Here's the hint:"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/dancingscript"
+        android:textColor="#8E9675 "
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/imageTimer"
+        android:layout_marginTop="70dp"
+        android:padding="10dp"
+        />
+    <TextView
+        android:id="@+id/hint"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textAlignment="center"
         android:fontFamily="@font/dancingscript"
@@ -72,8 +88,8 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:layout_marginEnd="10dp"
-        app:layout_constraintTop_toBottomOf="@id/imageTimer"
-        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toBottomOf="@id/mssg"
+        android:layout_marginTop="0dp"
         android:padding="10dp"
         />
     <Button
