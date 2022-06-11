@@ -80,7 +80,7 @@ public class StartGameActivity extends AppCompatActivity {
                 if (documentSnapshot.exists()) {
                     ((looping) getApplication()).setImage((String) documentSnapshot.get("image"));
                     ((looping) getApplication()).setHint((String) documentSnapshot.get("hint"));
-                    Toast.makeText(StartGameActivity.this, "image:"+documentSnapshot.get("hint"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(StartGameActivity.this, "image:"+documentSnapshot.get("hint"), Toast.LENGTH_SHORT).show();
                 }
             }
 

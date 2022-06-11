@@ -46,7 +46,8 @@
         app:layout_constraintEnd_toEndOf="@id/imageViewInformation"
         android:background="@drawable/border"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp"
+        />
 
 
     <ImageView
@@ -68,7 +69,7 @@
         android:layout_marginStart="10dp"
         android:textAlignment="center"
         android:fontFamily="@font/dancingscript"
-        android:textColor="#8E9675 "
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_marginEnd="10dp"
